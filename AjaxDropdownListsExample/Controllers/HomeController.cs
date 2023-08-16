@@ -15,7 +15,19 @@ namespace AjaxDropdownListsExample.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            List<Instructor> instructors = GetInstructors();
+            return View(instructors);
+        }
+
+        private List<Instructor> GetInstructors()
+        {
+            // Return a list of example instructors
+            return new List<Instructor>
+            {
+                new Instructor { InstructorId = 1, InstructorName = "John Doe", InstructorEmail = "JDoe@test.com"},
+                new Instructor { InstructorId = 2, InstructorName = "Jane Doe", InstructorEmail = "JaneDoe@test.com"},
+                new Instructor { InstructorId = 3, InstructorName = "John Smith", InstructorEmail = "JSmith@test.com"}
+            };
         }
 
         public IActionResult Privacy()
