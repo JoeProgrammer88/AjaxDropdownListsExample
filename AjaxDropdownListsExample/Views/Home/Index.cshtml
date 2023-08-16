@@ -4,3 +4,28 @@
 }
 
 <select asp-items="@new SelectList(Model, nameof(Instructor.InstructorId), nameof(Instructor.InstructorName))"></select>
+<select class="coursesList"></select>
+
+
+@section Scripts {
+    <script>
+        $(function () {
+            // When the instructor dropdown list changes, send a request to the server to get the courses for the selected instructor
+            $("select").change(function () {
+                var selectedInstructorId = $(this).val(); // Get the selected instructor ID from the dropdown list using the value of the selected option
+                $.ajax({
+                    url: '@Url.Action("GetCourses", "Home")', // Use the URL helper to link to the action and controller
+                    data: { instructorId: selectedInstructorId }, // Pass the instructorId to the controller
+                    
+                    // When the request is successful, update the courses dropdown list
+                    success: function (data) {
+                        $(".coursesList").empty(); // Empty any existing options from the courses dropdown list
+                        $.each(data, function (index, value) { // Loop through the course data and add each course to the courses dropdown list
+                            $(".coursesList").append("<option value='" + value.courseId + "'>" + value.courseName + "</option>");
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

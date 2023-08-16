@@ -19,6 +19,31 @@ namespace AjaxDropdownListsExample.Controllers
             return View(instructors);
         }
 
+        public IActionResult GetCourses(int instructorId)
+        {
+            List<Course> courses = GetCoursesByInstructorId(instructorId);
+            // Return the course data as JSON to be consumed by the AJAX call
+            return Json(courses);
+        }
+
+        private List<Course> GetCoursesByInstructorId(int instructorId)
+        {
+            // Return fake courses here. In a real application, you would query a database using the instructorId parameter
+            return new List<Course>
+            {
+                new Course { CourseId = 1, CourseName = "Course 1", NumberOfCredits = 3 },
+                new Course { CourseId = 2, CourseName = "Course 2", NumberOfCredits = 4 },
+                new Course { CourseId = 3, CourseName = "Course 3", NumberOfCredits = 3 },
+                new Course { CourseId = 4, CourseName = "Course 4", NumberOfCredits = 4 },
+                new Course { CourseId = 5, CourseName = "Course 5", NumberOfCredits = 3 },
+                new Course { CourseId = 6, CourseName = "Course 6", NumberOfCredits = 4 },
+                new Course { CourseId = 7, CourseName = "Course 7", NumberOfCredits = 3 },
+                new Course { CourseId = 8, CourseName = "Course 8", NumberOfCredits = 4 },
+                new Course { CourseId = 9, CourseName = "Course 9", NumberOfCredits = 3 },
+                new Course { CourseId = 10, CourseName = "Course 10", NumberOfCredits = 4 }
+            };
+        }
+
         private List<Instructor> GetInstructors()
         {
             // Return a list of example instructors
